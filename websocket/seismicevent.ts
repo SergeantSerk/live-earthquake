@@ -1,21 +1,21 @@
-interface Event {
+interface SeismicEvent {
     action: string,
-    data: EventData
+    data: SeismicEventData
 }
 
-interface EventData {
+interface SeismicEventData {
     type: string
     id: string
-    geometry: EventGeometry
-    properties: EventProperties
+    geometry: SeismicEventGeometry
+    properties: SeismicEventProperties
 }
 
-interface EventGeometry {
+interface SeismicEventGeometry {
     type: string
     coordinates: number[]
 }
 
-interface EventProperties {
+interface SeismicEventProperties {
     lastupdate: Date
     magtype: string
     evtype: string
@@ -31,4 +31,4 @@ interface EventProperties {
     unid: string
 }
 
-export default Event
+export default SeismicEvent
