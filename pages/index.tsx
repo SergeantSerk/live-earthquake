@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 const SeismicMap = dynamic(() => import('../components/seismicmap'), { ssr: false })
 
-//import styles from '@/styles/Home.module.css'
+import styles from '@/styles/Home.module.css'
 //import { Inter } from 'next/font/google'
 //const inter = Inter({ subsets: ['latin'] })
 
@@ -40,6 +40,9 @@ export default function Home() {
         <meta name="description" content="A near realtime earthquake monitoring app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossOrigin="" />
       </Head>
       <SeismicMap />
     </>
