@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, useMap } from 'react-leaflet'
 
+import 'leaflet/dist/leaflet.css'
 import styles from '@/styles/Home.module.css'
 
 function SeismicMap() {
