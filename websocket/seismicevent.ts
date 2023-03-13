@@ -16,7 +16,7 @@ interface SeismicEventGeometry {
 }
 
 interface SeismicEventProperties {
-    lastupdate: Date
+    lastupdate: string
     magtype: string
     evtype: string
     lon: number
@@ -24,7 +24,7 @@ interface SeismicEventProperties {
     lat: number
     depth: number
     mag: number
-    time: Date
+    time: string
     source_id: string
     source_catalog: string
     flynn_region: string

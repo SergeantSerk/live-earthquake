@@ -25,7 +25,12 @@ const SeismicMarker: FunctionComponent<SeismicMarkerProps> = ({ seismicEvent }) 
 
         return (
             <Marker icon={MarkerIcon} position={latLng}>
-                <Popup>You are here</Popup>
+                <Popup>
+                    <p>{properties.auth}: <b>{properties.unid}</b></p>
+                    {properties.flynn_region}<br />
+                    {properties.mag} {properties.magtype} @ {properties.depth} km<br />
+                    <p>{properties.time}</p>
+                </Popup>
             </Marker>
         )
     } else {
@@ -75,9 +80,9 @@ function SeismicMap() {
             }
         }
     }, [ws, setWs, events, latestSeismicEvent])
-    
+
     return (
-        <MapContainer className={styles.leaflet} center={[51.505, -0.09]} zoom={6} scrollWheelZoom={true}>
+        <MapContainer className={styles.leaflet} center={[51.505, -0.09]} zoom={8} scrollWheelZoom={true}>
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
