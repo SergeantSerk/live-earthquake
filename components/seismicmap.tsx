@@ -1,42 +1,12 @@
-import { FunctionComponent, useEffect, useState } from 'react'
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
-import { Icon, IconOptions, LatLng } from 'leaflet'
+import { useEffect, useState } from 'react'
+import { MapContainer, TileLayer } from 'react-leaflet'
 import SeismicEvent from '@/websocket/seismicevent'
+import SeismicMarker from './marker'
 
 import 'leaflet/dist/leaflet.css'
-import markerIcon from 'leaflet/dist/images/marker-icon.png'
-const MarkerIcon = new Icon<IconOptions>({ iconUrl: markerIcon.src })
 import styles from '@/styles/Home.module.css'
 
 const wsUrl = 'wss://www.seismicportal.eu/standing_order/websocket'
-
-interface SeismicMarkerProps {
-    seismicEvent: SeismicEvent | undefined
-}
-
-const SeismicMarker: FunctionComponent<SeismicMarkerProps> = ({ seismicEvent }) => {
-    const map = useMap()
-    if (seismicEvent) {
-        const properties = seismicEvent.data.properties
-        const latLng = new LatLng(properties.lat,
-            properties.lon,
-            properties.depth)
-        map.flyTo(latLng, map.getZoom())
-
-        return (
-            <Marker icon={MarkerIcon} position={latLng}>
-                <Popup>
-                    <p>{properties.auth}: <b>{properties.unid}</b></p>
-                    {properties.flynn_region}<br />
-                    {properties.mag} {properties.magtype} @ {properties.depth} km<br />
-                    <p>{properties.time}</p>
-                </Popup>
-            </Marker>
-        )
-    } else {
-        return null
-    }
-}
 
 function SeismicMap() {
     const [ws, setWs] = useState<WebSocket>()
