@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react'
 import { Marker, Popup, useMap } from 'react-leaflet'
 import { LatLng } from 'leaflet'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import SeismicEvent from '@/websocket/seismicevent'
 
 import styles from '@/styles/Home.module.css'
@@ -17,6 +19,10 @@ const SeismicMarker: FunctionComponent<SeismicMarkerProps> = ({ seismicEvent }) 
             properties.lon,
             properties.depth)
         map.flyTo(latLng, map.getZoom())
+
+        dayjs.extend(relativeTime)
+        const t0ToNow = dayjs(properties.time).fromNow()
+        const lastUpdateToNow = dayjs(properties.lastupdate).fromNow()
 
         return (
             <Marker position={latLng}>
@@ -42,12 +48,26 @@ const SeismicMarker: FunctionComponent<SeismicMarkerProps> = ({ seismicEvent }) 
                         </tr>
                         <tr>
                             <th>T+0:</th>
-                            <th>{properties.time}</th>
+                            <th>
+                                <div className={styles['tooltip']}>
+                                    <b>{t0ToNow}</b>
+                                    <span className={styles['tooltiptext']}>{properties.time}</span>
+                                </div>
+                            </th>
                         </tr>
-                        <tr>
-                            <th>Last:</th>
-                            <th>{properties.lastupdate}</th>
-                        </tr>
+                        {
+                            properties.time === properties.lastupdate ? null : (
+                                <tr>
+                                    <th>Last:</th>
+                                    <th>
+                                        <div className={styles['tooltip']}>
+                                            <b>{lastUpdateToNow}</b>
+                                            <span className={styles['tooltiptext']}>{properties.lastupdate}</span>
+                                        </div>
+                                    </th>
+                                </tr>
+                            )
+                        }
                     </table>
                 </Popup>
             </Marker>
