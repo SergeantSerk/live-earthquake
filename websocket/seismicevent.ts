@@ -31,4 +31,4 @@ interface SeismicEventProperties {
     unid: string
 }
 
-export default SeismicEvent
+export type { SeismicEvent, SeismicEventProperties }

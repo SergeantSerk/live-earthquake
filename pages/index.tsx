@@ -1,7 +1,6 @@
 import Head from 'next/head'
-import { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
-const SeismicMap = dynamic(() => import('../components/seismicmap'), { ssr: false })
+const SeismicMap = dynamic(() => import('../components/seismic/seismicmap'), { ssr: false })
 
 import styles from '@/styles/Home.module.css'
 //import { Inter } from 'next/font/google'

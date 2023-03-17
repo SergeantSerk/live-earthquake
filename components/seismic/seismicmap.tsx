@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
-import SeismicEvent from '@/websocket/seismicevent'
+import { SeismicEvent } from '@/websocket/seismicevent'
 import SeismicMarker from './seismicmarker'
 
 import 'leaflet/dist/leaflet.css'
@@ -25,20 +25,9 @@ function SeismicMap() {
             ws.onmessage = (ev: MessageEvent<any>) => {
                 console.debug('websocket new message', ev)
                 const seismicEvent = JSON.parse(ev.data) as SeismicEvent
-                if (seismicEvent.action === 'create') {
-                    if (!events.has(seismicEvent.data.id)) {
-                        events.set(seismicEvent.data.id, seismicEvent)
-                        setLatestSeismicEvent(seismicEvent)
-                    } else {
-                        console.error('tried to create an event that already exists', seismicEvent)
-                    }
-                } else if (seismicEvent.action === 'update') {
-                    if (events.has(seismicEvent.data.id)) {
-                        events.set(seismicEvent.data.id, seismicEvent)
-                        setLatestSeismicEvent(seismicEvent)
-                    } else {
-                        console.error('tried to update an event that does not exist', seismicEvent)
-                    }
+                if (seismicEvent.action === 'create' || seismicEvent.action === 'update') {
+                    events.set(seismicEvent.data.id, seismicEvent)
+                    setLatestSeismicEvent(seismicEvent)
                 } else {
                     console.error('unrecognized action in message', seismicEvent)
                 }
