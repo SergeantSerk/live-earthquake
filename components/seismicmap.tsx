@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { MapContainer, TileLayer } from 'react-leaflet'
 import SeismicEvent from '@/websocket/seismicevent'
-import SeismicMarker from './marker'
+import SeismicMarker from './seismicmarker'
 
 import 'leaflet/dist/leaflet.css'
 import styles from '@/styles/Home.module.css'

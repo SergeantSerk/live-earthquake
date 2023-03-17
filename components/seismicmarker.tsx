@@ -38,36 +38,38 @@ const SeismicMarker: FunctionComponent<SeismicMarkerProps> = ({ seismicEvent }) 
                     </div>
                     <hr />
                     <table>
-                        <tr>
-                            <th>Mag:</th>
-                            <th>{properties.mag} {properties.magtype}</th>
-                        </tr>
-                        <tr>
-                            <th>Depth:</th>
-                            <th>{properties.depth} km</th>
-                        </tr>
-                        <tr>
-                            <th>T+0:</th>
-                            <th>
-                                <div className={styles['tooltip']}>
-                                    <b>{t0ToNow}</b>
-                                    <span className={styles['tooltiptext']}>{properties.time}</span>
-                                </div>
-                            </th>
-                        </tr>
-                        {
-                            properties.time === properties.lastupdate ? null : (
-                                <tr>
-                                    <th>Last:</th>
-                                    <th>
-                                        <div className={styles['tooltip']}>
-                                            <b>{lastUpdateToNow}</b>
-                                            <span className={styles['tooltiptext']}>{properties.lastupdate}</span>
-                                        </div>
-                                    </th>
-                                </tr>
-                            )
-                        }
+                        <tbody>
+                            <tr>
+                                <th>Mag:</th>
+                                <th>{properties.mag} {properties.magtype}</th>
+                            </tr>
+                            <tr>
+                                <th>Depth:</th>
+                                <th>{properties.depth} km</th>
+                            </tr>
+                            <tr>
+                                <th>T+0:</th>
+                                <th>
+                                    <div className={styles['tooltip']}>
+                                        <b>{t0ToNow}</b>
+                                        <span className={styles['tooltiptext']}>{properties.time}</span>
+                                    </div>
+                                </th>
+                            </tr>
+                            {
+                                properties.time === properties.lastupdate ? null : (
+                                    <tr>
+                                        <th>Last:</th>
+                                        <th>
+                                            <div className={styles['tooltip']}>
+                                                <b>{lastUpdateToNow}</b>
+                                                <span className={styles['tooltiptext']}>{properties.lastupdate}</span>
+                                            </div>
+                                        </th>
+                                    </tr>
+                                )
+                            }
+                        </tbody>
                     </table>
                 </Popup>
             </Marker>
