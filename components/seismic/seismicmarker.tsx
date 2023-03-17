@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react'
-import { Marker, useMap } from 'react-leaflet'
+import { Circle, Marker, useMap } from 'react-leaflet'
 import { LatLng } from 'leaflet'
 import { SeismicEvent } from '@/websocket/seismicevent'
 
@@ -18,9 +18,11 @@ const SeismicMarker: FunctionComponent<SeismicMarkerProps> = ({ seismicEvent }) 
             properties.depth)
         map.flyTo(latLng, map.getZoom())
 
+        const circleRadius = Math.pow(properties.mag, 2) * 2000
         return (
             <Marker position={latLng}>
                 <SeismicMarkerPopup properties={properties}/>
+                <Circle center={latLng} radius={circleRadius} pathOptions={{ color: 'darkRed', fillColor: 'red', }} />
             </Marker>
         )
     } else {
